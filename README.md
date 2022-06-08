@@ -1,27 +1,25 @@
 # querywithODBCISeriesAccessVBA
-Interface between Excel(VBA) and DSN connection ISeries Access ODBC Driver for obtaining data through Query.
+Interfaz entre Excel(VBA) y conexión DSN ISeries Access ODBC Driver para obtención de datos a través de Query.
 
 
-Execution Test:
+Prueba de Ejecución:
 
 ![Imgur](https://i.imgur.com/qdLrgvZ.gif)
 
-* Prerequisites (only for windows 7 - 10):
+*  Prerrequisitos (solo para windows 7 - 10): 
 
-Office 2012-2019 (32/64 bit)
-Personal Communications iSeries Access for Windows
+Office 2012-2019 (32/64 bits) 
+Personal Communications iSeries Access para Windows
 
-Instructions:
+Instrucciones:
 
-* Open or create a macro-enabled Excel file.
-* Create a table of contents to a specific sheet called VAR.
-
-Important note: Specify Query Select in B1, the reference code for each select is '[[CODE]]', and also add username and password for the connection in cells E1 and E2 respectively.
+*  Abrir o crear un archivo Excel habilitado para macros.
+*  Cree una tabla de contenidos a una hoja especifica llamada VAR.
+Nota importante: Especificar Query Select en B1, el codigo de referencia para cada select es '[[CODE]]', y anexar tambien usuario y contraseña para la conexion en las celdas E1 y E2 respectivamente.
 
 ![Imgur2](https://i.imgur.com/JPWxF55.png)
 
-SQL 
-
+SQL
 ```SQL
 ...
 WHERE
@@ -29,28 +27,26 @@ C.CLCODE = '[[CODE]]'
 ...
 ```
 
-* In another Sheet (it can be Sheet1) build the following table in an empty sheet paying special attention to the columns specified in the VAR sheet (Column A) in the previous step the columns must match the headers, not textually but they must be the data that was specified in the VAR sheet.
+*  En otra Hoja (puede ser Hoja1) construya en una hoja vacia la siguiente tabla poniendo especial atencion a las columnas especificadas en la hoja VAR (Columna A) en el paso anterior las columnas deben concordar con los encabezados, no textualmente pero si deben ser los datos que se especificaron el la hoja VAR.
 
 ![Imgur3](https://i.imgur.com/VWyjiod.png)
 
-* Check that the system data access (ODBC) has the following settings. (see code)
+* Verifique que el acceso a datos del sistema (ODBC) tenga la siguiente configuracion. (ver codigo)
 
 ![Imgur4](https://i.imgur.com/iZ5JITV.png)
 
-VBA 
-
+VBA
 ```VBA
-...
 USERNAME = Sheets("VAR").Range("E1")
 PASSWORD = Sheets("VAR").Range("E2")
+    
 conn.ConnectionString = "dsn=SICOPUB-MAN;User Id=" & USERNAME & ";Password=" & PASSWORD & " ;"
-...
 ```
 
-Note: The data to be searched are the codes, these are taken as a reference to locate the rest of the data based on the Query specified in the VAR Sheet applied to each code.
+Nota: Los datos objeto de busqueda son los codigos, estos se toman como referencia para ubicar el resto de datos en base al Query especificado en Hoja VAR aplicado a cada codigo.
 
-Enter codes to search for, select the codes in the table and execute the macro.
+Digitar codigos a buscar, seleccionar los codigos en la tabla y ejecutar la macro.
 
 ![Imgur](https://i.imgur.com/qdLrgvZ.gif)
 
-Note: The selection can be one or several elements and it also supports elements only from a specified filter (previously the table data must be filtered in excel and the macro will only be executed on the selection without considering hidden rows).
+Nota: La seleccion puede ser uno o varios elementos y soporta tambien elementos solo de un filtro especificado (previamente se deben filtrar los datos de la tabla en excel y unicamente ejecutara la macro a la seleccion sin considerar filas ocultas).
